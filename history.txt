@@ -1,0 +1,48 @@
+start cat
+stop cat
+start cat
+stop cat
+stop ca
+shutdown
+start cat
+status
+shutdown
+start cat
+status
+shutdown
+start cat
+status
+l
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+shutdown
+start ls
+stop all
+status
+shutdown
+start ls
+start cat
+shutdown
+stop all
