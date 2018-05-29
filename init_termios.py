@@ -17,6 +17,7 @@ class InitTermios:
     command_y = 9
     output_x = 0
     output_y = 15
+    curr_output_y = output_y
     stdscr = 0
     line = []
     cant_print = False
@@ -83,7 +84,7 @@ class InitTermios:
             self.stdscr.insnstr(self.output_y + 1, 2, "Can't display output", 0)
         else:
             message_split = message.split('\n')
-            put_y = self.output_y
+            put_y = self.curr_output_y
             for splitted in message_split:
                 put_x = 2
                 for letter in splitted:
@@ -97,6 +98,9 @@ class InitTermios:
                             self.resetWindow()
                             self.stdscr.insnstr(self.output_y + 1, 2, "Can't display output", 0)
                 put_y += 1
+            self.curr_output_y = put_y - 1
+            if self.curr_output_y >= self.output_y + 5:
+                self.curr_output_y = self.output_y
             self.createFrame()
 
 
@@ -121,6 +125,7 @@ class InitTermios:
         self.i = 0
         self.cursor_y = self.command_y
         self.cursor_x = self.command_x + len(self.prompt)
+        self.curr_output_y = self.output_y
         self.displayHeader()
         self.createFrame()
         self.stdscr.insnstr(self.cursor_y, 0, self.prompt, 0)
@@ -129,7 +134,7 @@ class InitTermios:
         self.cant_print = False
 
     def tryDisplay(self):
-        if self.window_x < 53 or self.window_y < 20:
+        if self.window_x < 53 or self.window_y < 23:
             self.stdscr.erase()
             self.stdscr.insnstr(0, 0, "Can't display Taskmaster", 0)
             self.cant_print = True
@@ -146,7 +151,7 @@ class InitTermios:
             if response != '' and response != '\n' and response != None:
                 self.printInOutput(response)
                 self.cursor_y = self.command_y
-                self.cursor_x = self.command_x + len(self.prompt)
+                self.cursor_x = self.command_x + len(self.prompt) + len(self.line)
                 self.stdscr.move(self.cursor_y, self.cursor_x)
             key = stdscr.getch()
             if self.cant_print == False:
